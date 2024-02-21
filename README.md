@@ -94,7 +94,9 @@
 
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-### Docker Compose
+### Integration
+
+#### Docker Compose
 
 - [ ] Create a docker-compose.yml file to orchestrate the containers for the backend, frontend, and MongoDB.
 - [ ] Include appropriate environment variables for configuration.
