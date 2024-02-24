@@ -4,14 +4,10 @@ using MongoDB.Bson.Serialization.Attributes;
 using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace ProductApi.Models;
+namespace ProductApi.Entities;
 
-public class Product
+public class Product : BaseEntity
 {
-    [BsonId]
-    [BsonRepresentation(BsonType.ObjectId)]
-    public string? Id { get; set; }
-
     [Required]
     public string SKU { get; set; } = null!;
 
@@ -22,7 +18,7 @@ public class Product
     public int Stock { get; set; }
 
     [Required]
-    public string ImageUrl { get; set; } = null!;
+    public List<string> ImageUrl { get; set; } = null!;
 
     public bool InStock => Stock > 0;
 }

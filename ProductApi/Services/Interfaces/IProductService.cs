@@ -1,16 +1,16 @@
-﻿using ProductApi.Models;
+﻿using ProductApi.Entities;
 
 namespace ProductApi.Services.Interfaces;
 
 public interface IProductService
 {
-    Task<List<Product>> GetAllAsync();
+    Task<IEnumerable<Product>> GetAllProductsAsync();
 
-    Task<Product?> GetAsync(string id);
+    Task<Product?> GetProductAsync(string id);
 
-    Task CreateAsync(Product newProduct);
+    Task CreateProductAsync(Product newProduct);
 
-    Task UpdateAsync(string id, Product updatedProduct);
+    Task UpdateProductAsync(string id, Product updatedProduct);
 
-    Task RemoveAsync(string productId);
+    Task RemoveProductAsync(string productId);
 }

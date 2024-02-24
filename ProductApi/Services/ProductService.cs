@@ -1,47 +1,36 @@
 ﻿using Microsoft.Extensions.Options;
 using MongoDB.Driver;
-using ProductApi.Models;
+using ProductApi.Entities;
+using ProductApi.Repository.Interface;
 using ProductApi.Services.Interfaces;
+using System;
 
 namespace ProductApi.Services;
 
 public class ProductService : IProductService
 {
-    private readonly IMongoCollection<Product> _productCollection;
+    private readonly IMongoRepository<Product> _productRepository;
 
-    public ProductService(IOptions<ProductDatabaseSettings> userWalletDatabaseSettings)
+    public ProductService(IMongoRepository<Product> productRepository)
     {
-        var mongoClient = new MongoClient(
-            userWalletDatabaseSettings.Value.ConnectionString);
-
-        var mongoDatabase = mongoClient.GetDatabase(
-            userWalletDatabaseSettings.Value.DatabaseName);
-
-        _productCollection = mongoDatabase.GetCollection<Product>(
-            userWalletDatabaseSettings.Value.ProductsCollectionName);
+        _productRepository = productRepository;
     }
 
-    public Task CreateAsync(Product newProduct)
-    {
-        throw new NotImplementedException();
-    }
+    public async Task CreateProductAsync(Product newProduct)
+        => await _productRepository.InsertOneAsync(newProduct);
 
-    public Task<List<Product>> GetAllAsync()
+    public async Task<IEnumerable<Product>> GetAllProductsAsync()
+        => await _productRepository.GetAllAsync();
+
+    public async Task<Product?> GetProductAsync(string id)
+        => await _productRepository.GetOneAsync(id);
+
+    public Task RemoveProductAsync(string productId)
     {
         throw new NotImplementedException();
     }
 
-    public Task<Product?> GetAsync(string id)
-    {
-        throw new NotImplementedException();
-    }
-
-    public Task RemoveAsync(string productId)
-    {
-        throw new NotImplementedException();
-    }
-
-    public Task UpdateAsync(string id, Product updatedProduct)
+    public Task UpdateProductAsync(string id, Product updatedProduct)
     {
         throw new NotImplementedException();
     }
