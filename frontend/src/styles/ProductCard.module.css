@@ -1,22 +1,48 @@
+/* ProductCard.module.css */
+.cardList {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 30px;
+  margin-left: 200px;
+}
+
 .card {
-    background-color: light-dark(var(--mantine-color-white), var(--mantine-color-dark-7));
+  flex: 1 0 calc(33% ); /* Each card will take one-third of the available width minus the gap */
+  max-width: calc(25% ); /* Adjust the maximum width of each card minus the gap */
+  margin: 30px;
+}
+
+@media screen and (max-width: 767px) {
+  .cardList {
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: 0px;
   }
+
+  .card {
+    margin: 10px;
+    flex-basis: calc(100% - 20px); /* Each card will take full width minus the gap */
+    max-width: calc(100% - 20px); /* Adjust the maximum width of each card minus the gap */
+  }
+}
+
+.section {
+  border-bottom: rem(1px) solid light-dark(var(--mantine-color-gray-3), var(--mantine-color-dark-4));
+  padding-left: var(--mantine-spacing-md);
+  padding-right: var(--mantine-spacing-md);
+  padding-bottom: var(--mantine-spacing-md);
+}
   
-  .section {
-    border-bottom: rem(1px) solid light-dark(var(--mantine-color-gray-3), var(--mantine-color-dark-4));
-    padding-left: var(--mantine-spacing-md);
-    padding-right: var(--mantine-spacing-md);
-    padding-bottom: var(--mantine-spacing-md);
-  }
+.like {
+  color: var(--mantine-color-red-6);
+  width: rem(20px);
+  height: rem(20px);
+}
   
-  .like {
-    color: var(--mantine-color-red-6);
-    width: rem(20px);
-    height: rem(20px);
-  }
+.label {
+  text-transform: uppercase;
+  font-size: var(--mantine-font-size-xs);
+  font-weight: 700;
+}
+
   
-  .label {
-    text-transform: uppercase;
-    font-size: var(--mantine-font-size-xs);
-    font-weight: 700;
-  }

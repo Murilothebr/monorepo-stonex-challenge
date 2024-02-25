@@ -1,13 +1,17 @@
 import Image from "next/image";
 import styles from "./page.module.css";
 import { HeaderMegaMenu } from '../components/HeaderMenu';
-import { BadgeCard } from "../components/ProductCard";
+import { BadgeCardTopListingList } from "../components/ProductCard";
+import { Card, Text, Group, Badge, Button, ActionIcon } from '@mantine/core';
 
 export default function Home() {
   return (
     <div>
     <HeaderMegaMenu />
-    <BadgeCard />
+
+    <Text size="lg" style={{ marginBottom: '20px', textAlign: 'center', fontWeight: '100px', fontSize: '45px'}}>Top Products</Text>
+
+    <BadgeCardTopListingList />
     </div>
   );
 }

@@ -48,7 +48,7 @@ import Link from 'next/link';
     {
       icon: IconNotebook,
       title: 'Study',
-      description: 'Still studing Nextjs 14 and the new releases',
+      description: 'Im Still studing Nextjs and its new releases',
     },
   ];
   

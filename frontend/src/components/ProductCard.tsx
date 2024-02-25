@@ -1,30 +1,67 @@
 "use client"
 
-import { IconHeart } from '@tabler/icons-react';
+import { IconTrash } from '@tabler/icons-react';
 import { Card, Image, Text, Group, Badge, Button, ActionIcon } from '@mantine/core';
 import classes from '../styles/ProductCard.module.css';
+import { useEffect, useState } from 'react';
+import { fetchCardData } from '../api/apiService'; // Import the API service
 
-const mockdata = {
-  image:
-    'https://images.unsplash.com/photo-1437719417032-8595fd9e9dc6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&q=80',
-  title: 'Verudela Beach',
-  country: 'Croatia',
-  description:
-    'Completely renovated for the season 2020, Arena Verudela Bech Apartments are fully equipped and modernly furnished 4-star self-service apartments located on the Adriatic coastline by one of the most beautiful beaches in Pula.',
-  badges: [
-    { emoji: '☀️', label: 'Sunny weather' },
-    { emoji: '🦓', label: 'Onsite zoo' },
-    { emoji: '🌊', label: 'Sea' },
-    { emoji: '🌲', label: 'Nature' },
-    { emoji: '🤽', label: 'Water sports' },
-  ],
-};
+interface CardData {
+  name: string;
+  sku: string;
+  image: string;
+  title: string;
+  price: string;
+  description: string;
+  tags: string;
+  badges: { tag: string }[];
+}
 
-export function BadgeCard() {
-  const { image, title, description, country, badges } = mockdata;
+export function BadgeCardTopListingList() {
+  const [data, setData] = useState<CardData[]>([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const apiData = await fetchCardData();
+        if (apiData) {
+          const newData: CardData[] = apiData.map(item => ({
+            name: item.name,
+            sku: item.sku,
+            image: item.image,
+            title: item.title,
+            price: item.price,
+            description: item.description,
+            tags: item.tags,
+            badges: item.badges
+          }));
+          setData(newData);
+        } else {
+          console.error('Empty API response');
+        }
+      } catch (error) {
+        console.error('Error fetching card data:', error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  return (
+    <div className={classes.cardList}>
+      {data.map((item, index) => (
+        <BadgeCardTopListing key={index} data={item} />
+      ))}
+    </div>
+  );
+  
+}
+
+export function BadgeCardTopListing({ data }: { data: CardData }) {
+  const { image, title, description, badges } = data;
   const features = badges.map((badge) => (
-    <Badge variant="light" key={badge.label} leftSection={badge.emoji}>
-      {badge.label}
+    <Badge variant="light" key={badge.tag}>
+      {badge.tag}
     </Badge>
   ));
 
@@ -33,36 +70,31 @@ export function BadgeCard() {
       <Card.Section>
         <Image src={image} alt={title} height={180} />
       </Card.Section>
-
       <Card.Section className={classes.section} mt="md">
         <Group justify="apart">
           <Text fz="lg" fw={500}>
             {title}
           </Text>
-          <Badge size="sm" variant="light">
-            {country}
-          </Badge>
+          {/* Add Badge component for country */}
         </Group>
         <Text fz="sm" mt="xs">
           {description}
         </Text>
       </Card.Section>
-
       <Card.Section className={classes.section}>
-        <Text mt="md" className={classes.label} c="dimmed">
+        <Text mt="md" className={classes.tag} c="dimmed">
           Perfect for you, if you enjoy
         </Text>
         <Group gap={7} mt={5}>
           {features}
         </Group>
       </Card.Section>
-
       <Group mt="xs">
         <Button radius="md" style={{ flex: 1 }}>
           Show details
         </Button>
         <ActionIcon variant="default" radius="md" size={36}>
-          <IconHeart className={classes.like} stroke={1.5} />
+          <IconTrash className={classes.like} stroke={1.5} />
         </ActionIcon>
       </Group>
     </Card>
