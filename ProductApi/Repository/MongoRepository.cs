@@ -33,10 +33,17 @@ public class MongoRepository<T> : IMongoRepository<T> where T : BaseEntity
         => await _collection.InsertOneAsync(document);
 
     public async Task<T> GetOneAsync(string id)
-        => await _collection.FindAsync(x => x.Id.Equals(id)).Result.FirstOrDefaultAsync();
+        => await _collection.FindAsync(x => x.Id.Equals(new ObjectId(id))).Result.FirstOrDefaultAsync();
 
     public async Task<IEnumerable<T>> GetAllAsync()
          => await _collection.Find(_ => true).ToListAsync();
+
+    public async Task UpdateOneAsync(string id, T newDocument)
+    {
+        var objectId = ObjectId.Parse(id);
+        var filter = Builders<T>.Filter.Eq("_id", objectId);
+        await _collection.ReplaceOneAsync(filter, newDocument);
+    }
 
     public async Task DeleteOneAsync(string id)
         => await _collection.DeleteOneAsync(id);

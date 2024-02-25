@@ -4,9 +4,9 @@ namespace ProductApi.Services.Interfaces;
 
 public interface IProductService
 {
-    Task<IEnumerable<Product>> GetAllProductsAsync();
+    Task<Product> GetProductAsync(string id);
 
-    Task<Product?> GetProductAsync(string id);
+    Task<IEnumerable<Product>> GetAllProductsAsync();
 
     Task CreateProductAsync(Product newProduct);
 

@@ -17,6 +17,8 @@ public interface IMongoRepository<T> where T : BaseEntity
 
     Task<T> GetOneAsync(string id);
 
+    Task UpdateOneAsync(string id, T newDocument);
+
     Task<IEnumerable<T>> GetAllAsync();
 
     Task DeleteOneAsync(string id);

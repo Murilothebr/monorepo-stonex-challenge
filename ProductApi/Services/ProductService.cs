@@ -16,22 +16,18 @@ public class ProductService : IProductService
         _productRepository = productRepository;
     }
 
+    public async Task<Product> GetProductAsync(string id)
+        => await _productRepository.GetOneAsync(id);
+
     public async Task CreateProductAsync(Product newProduct)
         => await _productRepository.InsertOneAsync(newProduct);
 
     public async Task<IEnumerable<Product>> GetAllProductsAsync()
         => await _productRepository.GetAllAsync();
 
-    public async Task<Product?> GetProductAsync(string id)
-        => await _productRepository.GetOneAsync(id);
+    public async Task RemoveProductAsync(string productId)
+        => await _productRepository.DeleteOneAsync(productId);
 
-    public Task RemoveProductAsync(string productId)
-    {
-        throw new NotImplementedException();
-    }
-
-    public Task UpdateProductAsync(string id, Product updatedProduct)
-    {
-        throw new NotImplementedException();
-    }
+    public async Task UpdateProductAsync(string id, Product updatedProduct)
+        => await _productRepository.UpdateOneAsync(id, updatedProduct);
 }

@@ -15,6 +15,12 @@ public class ProductController
         _productService = productService;
     }
 
+    [HttpGet("{id}")]
+    public async Task<Product> GetProduct(string id)
+    {
+        return await _productService.GetProductAsync(id);
+    }
+
     [HttpGet]
     public async Task<IEnumerable<Product>> GetAllProducts()
     {
@@ -22,13 +28,19 @@ public class ProductController
     }
 
     [HttpPost]
-    public async Task CreateProduct(Product newProduct)
+    public async Task CreateProduct(Product product)
     {
-        await _productService.CreateProductAsync(newProduct);
+        await _productService.CreateProductAsync(product);
+    }
+
+    [HttpPatch]
+    public async Task UpdateProduct(string id, Product newProduct)
+    {
+        await _productService.UpdateProductAsync(id, newProduct);
     }
 
     [HttpDelete]
-    public async Task RemoveProductAsync(string id)
+    public async Task RemoveProductAsync([FromBody] string id)
     {
         await _productService.RemoveProductAsync(id);
     }
