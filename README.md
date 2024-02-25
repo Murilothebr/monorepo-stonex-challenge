@@ -4,15 +4,15 @@
 
 ### Backend (.NET Core)
 
-- [ ] Create a new .NET Core project.
-- [ ] Configure MongoDB as the database.
-- [ ] Implement Clean Architecture principles (Separation of Concerns, Dependency Inversion, etc.).
+- [x] Create a new .NET Core project.
+- [x] Configure MongoDB as the database.
+- [x] Implement Clean Architecture principles (Separation of Concerns, Dependency Inversion, etc.).
 
 ### Frontend (ReactJS with Next.js)
 
-- [ ] Initialize a new Next.js project with React.
-- [ ] Use a modular component structure for better organization.
-- [ ] Implement Clean Code principles in the frontend codebase.
+- [x] Initialize a new Next.js project with React.
+- [x] Use a modular component structure for better organization.
+- [x] Implement Clean Code principles in the frontend codebase.
 
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -20,20 +20,20 @@
 
 #### 1. Project Setup and Configuration
 
-- [ ] Set up a clean .NET Core project structure.
-- [ ] Use Dockerfile for containerization.
+- [x] Set up a clean .NET Core project structure.
+- [x] Use Dockerfile for containerization.
 
 #### 2. Model
 
-- [ ] Create a product model with necessary fields (SKU, price, stock, etc.).
-- [ ] Implement data annotations for validation.
+- [x] Create a product model with necessary fields (SKU, price, stock, etc.).
+- [x] Implement data annotations for validation.
 
 #### 3. Generic MongoDB Repository
 
-- [ ] Implement a generic MongoDB repository that accepts entities as <T>.
-- [ ] Include methods like Find, FindById, FindWhere, etc.
-- [ ] Utilize official MongoDB driver for .NET.
-- [ ] Implement MongoDB transactions.
+- [x] Implement a generic MongoDB repository that accepts entities as '< T >'.
+- [x] Include methods like Find, FindById, FindWhere, etc.
+- [x] Utilize official MongoDB driver for .NET.
+- [x] Implement MongoDB transactions.
 
 #### 4. Fluent Validation
 
@@ -43,15 +43,15 @@
 
 #### 5. Services
 
-- [ ] Implement services for CRUD operations on products.
-- [ ] Apply Dependency Injection for the generic repository.
+- [x] Implement services for CRUD operations on products.
+- [x] Apply Dependency Injection for the generic repository.
 - [ ] Utilize Fluent Validation for input validation.
 - [ ] Implement MongoDB transactions in the services layer.
 
 #### 6. Controllers
 
-- [ ] Create RESTful controllers for product CRUD operations.
-- [ ] Follow Clean Code principles in controller methods.
+- [x] Create RESTful controllers for product CRUD operations.
+- [x] Follow Clean Code principles in controller methods.
 
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -59,8 +59,8 @@
 
 #### 1. Project Setup and Configuration
 
-- [ ] Set up a clean Next.js project structure.
-- [ ] Utilize Dockerfile for frontend containerization.
+- [x] Set up a clean Next.js project structure.
+- [x] Utilize Dockerfile for frontend containerization.
 
 #### 2. Pages and Routes
 
@@ -76,8 +76,8 @@
 
 #### 4. UI Styling
 
-- [ ] Apply mantine for UI component styling.
-- [ ] Follow clean code practices in styling components.
+- [x] Apply mantine for UI component styling.
+- [x] Follow clean code practices in styling components.
 
 #### 5. Integration between Frontend and Backend
 
@@ -98,13 +98,13 @@
 
 #### Docker Compose
 
-- [ ] Create a docker-compose.yml file to orchestrate the containers for the backend, frontend, and MongoDB.
-- [ ] Include appropriate environment variables for configuration.
+- [x] Create a docker-compose.yml file to orchestrate the containers for the backend, frontend, and MongoDB.
+- [x] Include appropriate environment variables for configuration.
 
 #### Clean Code Practices
 
-- [ ] Enforce SOLID principles in both backend and frontend code.
-- [ ] Ensure meaningful variable/method names and code readability.
+- [x] Enforce SOLID principles in both backend and frontend code.
+- [x] Ensure meaningful variable/method names and code readability.
 - [ ] Implement unit tests for critical functionalities.
 
 ### Delivery
