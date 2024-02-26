@@ -4,7 +4,7 @@ import { IconTrash } from '@tabler/icons-react';
 import { Card, Image, Text, Group, Badge, Button, ActionIcon } from '@mantine/core';
 import classes from '../styles/ProductCard.module.css';
 import { useEffect, useState } from 'react';
-import { fetchCardData } from '../services/apiService';
+import { fetchCardData, removeCardById } from '../services/apiService';
 
 interface CardData {
   name: string;
@@ -34,6 +34,16 @@ export function BadgeCardTopListing() {
 
     fetchData();
   }, []);
+
+  const handleRemoveCard = async (id: any) => {
+    try {
+      await removeCardById(id);
+      setData(data.filter(card => card.productId !== id));
+    } catch (error) {
+      console.error('Error removing card:', error);
+    }
+  };
+
 
   return (
     <div className={classes.cardList}>
@@ -70,7 +80,12 @@ export function BadgeCardTopListing() {
             <Button radius="md" style={{ flex: 1 }}>
               Show details
             </Button>
-            <ActionIcon variant="default" radius="md" size={36}>
+            <ActionIcon
+              variant="default"
+              radius="md"
+              size={36}
+              onClick={() => handleRemoveCard(item.productId)} // Call handleRemoveCard with item id
+            >
               <IconTrash className={classes.like} stroke={1.5} />
             </ActionIcon>
           </Group>
