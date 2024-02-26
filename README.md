@@ -72,8 +72,6 @@
 - [ ] Use react-hook-form for efficient form handling.
 - [ ] Implement form validation with zod.
 
- 
-
 #### 4. UI Styling
 
 - [x] Apply mantine for UI component styling.
@@ -83,14 +81,12 @@
 
 #### a. API Consumption
 
-- [ ] Configure the frontend to consume backend API endpoints.
-- [ ] Utilize a clean approach for handling API calls.
-
- 
+- [x] Configure the frontend to consume backend API endpoints.
+- [x] Utilize a clean approach for handling API calls.
 
 #### b. Dependency Injection
 
-- [ ] Consider using Dependency Injection on the frontend for managing API calls.
+- [x] Consider using Dependency Injection on the frontend for managing API calls.
 
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -99,16 +95,16 @@
 #### Docker Compose
 
 - [x] Create a docker-compose.yml file to orchestrate the containers for the backend, frontend, and MongoDB.
-- [x] Include appropriate environment variables for configuration.
+- [ ] Include appropriate environment variables for configuration.
 
 #### Clean Code Practices
 
 - [x] Enforce SOLID principles in both backend and frontend code.
 - [x] Ensure meaningful variable/method names and code readability.
-- [ ] Implement unit tests for critical functionalities.
+- [x] Implement unit tests for critical functionalities.
 
 ### Delivery
 
 - [ ] Provide separate Docker Compose files for development and production.
-- [ ] Include clear instructions for setting up and running the entire application in README.
+- [x] Include clear instructions for setting up and running the entire application in README.
 - [ ] Ensure the application is accessible through a browser after Docker Compose execution.
