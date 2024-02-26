@@ -15,7 +15,7 @@ interface CardData {
 
 export async function fetchCardData(): Promise<CardData[]> {
   try {
-    const response: AxiosResponse<CardData[]> = await axios.get<CardData[]>('https://localhost:44335/Product');
+    const response: AxiosResponse<CardData[]> = await axios.get<CardData[]>('http://localhost:44335/Product');
     return response.data;
   } catch (error) {
     console.error('Error fetching data:', error);
@@ -25,7 +25,7 @@ export async function fetchCardData(): Promise<CardData[]> {
 
 export async function removeCardById(id: any): Promise<void> {
   try {
-    await axios.delete(`https://localhost:44335/Product/${id}`);
+    await axios.delete(`http://localhost:44335/Product/${id}`);
     console.log(`Card with ID ${id} has been removed.`);
   } catch (error) {
     console.error(`Error removing card with ID ${id}:`, error);
