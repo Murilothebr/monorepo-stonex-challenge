@@ -4,13 +4,13 @@ interface CardData {
   name: string;
   sku: string;
   price: string;
+  stock: string;
   description: string;
   imageUrls: string[];
   tags: string[];
   sessions: string[];
   productId: string;
   inStock: boolean;
-  id: any;
 }
 
 export async function fetchCardData(): Promise<CardData[]> {
@@ -20,6 +20,16 @@ export async function fetchCardData(): Promise<CardData[]> {
   } catch (error) {
     console.error('Error fetching data:', error);
     return [];
+  }
+}
+
+export async function PostCard(cardData: CardData): Promise<void> {
+  try {
+    const response = await axios.post<CardData>('http://localhost:44335/Product', cardData);
+    console.log('Response data:', response.data);
+  } catch (error) {
+    console.error('Error fetching data:', error);
+    throw error;
   }
 }
 

@@ -1,22 +1,22 @@
 "use client"
 
+import { ActionIcon, Badge, Button, Card, Group, Image, Text } from '@mantine/core';
 import { IconTrash } from '@tabler/icons-react';
-import { Card, Image, Text, Group, Badge, Button, ActionIcon } from '@mantine/core';
-import classes from '../styles/ProductCard.module.css';
 import { useEffect, useState } from 'react';
 import { fetchCardData, removeCardById } from '../services/apiService';
+import classes from '../styles/ProductCard.module.css';
 
 interface CardData {
   name: string;
   sku: string;
   price: string;
+  stock: string;
   description: string;
   imageUrls: string[];
   tags: string[];
   sessions: string[];
   productId: string;
   inStock: boolean;
-  id: any;
 }
 
 export function BadgeCardTopListing() {
