@@ -37,9 +37,7 @@ namespace ProductApi.Services
             if (!validationResult.IsValid)
                 throw new ValidationException(validationResult.Errors);
 
-            var a = await isProductSKUnique(newProduct.SKU);
-
-            if (! a)
+            if (! await isProductSKUnique(newProduct.SKU))
                 throw new ValidationException("Sku must be unique");
 
             await _productRepository.InsertOneAsync(newProduct);
