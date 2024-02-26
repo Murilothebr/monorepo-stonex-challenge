@@ -1,25 +1,23 @@
 import axios, { AxiosResponse } from 'axios';
 
-interface ApiResponse {
-  data: CardData[];
-}
-
 interface CardData {
   name: string;
   sku: string;
-  image: string;
-  title: string;
   price: string;
   description: string;
-  tags: string;
-  badges: { tag: string }[];
+  imageUrls: string[];
+  tags: string[];
+  sessions: string[];
+  productId: string;
+  inStock: boolean;
+  id: any;
 }
 
 export async function fetchCardData(): Promise<CardData[]> {
   try {
-    const response: AxiosResponse<ApiResponse> = await axios.get<ApiResponse>('https://localhost:44335/Product');
-    console.log(response)
-    return response.data.data;
+    const response: AxiosResponse<CardData[]> = await axios.get<CardData[]>('https://localhost:44335/Product');
+    console.log("response: " + response.data)
+    return response.data;
   } catch (error) {
     console.error('Error fetching data:', error);
     return [];

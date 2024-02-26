@@ -21,8 +21,8 @@
 
   .card {
     margin: 10px;
-    flex-basis: calc(100% - 20px); /* Each card will take full width minus the gap */
-    max-width: calc(100% - 20px); /* Adjust the maximum width of each card minus the gap */
+    flex-basis: calc(100% - 20px);
+    max-width: calc(100% - 20px); 
   }
 }
 

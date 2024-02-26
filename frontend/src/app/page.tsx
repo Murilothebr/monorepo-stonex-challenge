@@ -1,7 +1,7 @@
 import Image from "next/image";
 import styles from "./page.module.css";
 import { HeaderMegaMenu } from '../components/HeaderMenu';
-import { BadgeCardTopListingList } from "../components/ProductCard";
+import { BadgeCardTopListing } from "../components/ProductCard";
 import { Card, Text, Group, Badge, Button, ActionIcon } from '@mantine/core';
 
 export default function Home() {
@@ -11,7 +11,7 @@ export default function Home() {
 
     <Text size="lg" style={{ marginBottom: '20px', textAlign: 'center', fontWeight: '100px', fontSize: '45px'}}>Top Products</Text>
 
-    <BadgeCardTopListingList />
+    <BadgeCardTopListing />
     </div>
   );
 }
