@@ -1,19 +1,14 @@
 version: '3.8'
 
 services:
-  # productsapi:
-  #   image: products-api
-  #   container_name: products-api
-  #   ports:
-  #     - "3000:443"
-  #   restart: always 
-
-  # products-next:
-  #   image: products-nextjs
-  #   container_name: products-frontend
-  #   ports:
-  #     - "4000:4000"
-  #   restart: always
+  productsapi:
+    image: products-api
+    container_name: products-api
+    ports:
+      - "44335:8080"
+    restart: always 
+    networks:
+      - products-network
 
   mongodb:
     image: mongo
@@ -26,6 +21,21 @@ services:
     volumes:
       - mongodb_data:/data/db
     restart: always
+    networks:
+      - products-network
+
+  # products-next:
+  #   image: products-nextjs
+  #   container_name: products-frontend
+  #   ports:
+  #     - "4000:4000"
+  #   restart: always
+    # networks:
+    #   - products-network
+
+networks:
+  products-network:
+    driver: bridge
 
 volumes:
   mongodb_data:
