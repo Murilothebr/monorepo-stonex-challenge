@@ -54,14 +54,3 @@ public class Product : BaseEntity
     public object productId => Id.ToString();
     public bool InStock => Stock > 0;
 }
-public class ProductValidator : AbstractValidator<Product>
-{
-    public ProductValidator()
-    {
-        RuleFor(x => x.Id).NotNull();
-        RuleFor(x => x.SKU).Length(0, 10);
-        RuleFor(x => x.Price).GreaterThanOrEqualTo(0).WithMessage("Price must be greater than or equal to zero");
-        RuleFor(x => x.Stock).GreaterThanOrEqualTo(1).WithMessage("Stock must be valid number");
-        RuleFor(x => x.ImageUrls).NotNull().NotEmpty().WithMessage("Product must have a image");
-    }
-}

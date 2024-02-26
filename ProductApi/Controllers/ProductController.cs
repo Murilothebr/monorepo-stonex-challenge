@@ -6,7 +6,7 @@ namespace ProductApi.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-public class ProductController
+public class ProductController : ControllerBase
 {
     private readonly IProductService _productService;
 
@@ -16,32 +16,76 @@ public class ProductController
     }
 
     [HttpGet("{id}")]
-    public async Task<Product> GetProduct(string id)
+    public async Task<ActionResult<Product>> GetProduct(string id)
     {
-        return await _productService.GetProductAsync(id);
+        try
+        {
+            var product = await _productService.GetProductAsync(id);
+            if (product == null)
+            {
+                return NotFound(); 
+            }
+            return Ok(product);
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, ex.Message); 
+        }
     }
 
     [HttpGet]
-    public async Task<IEnumerable<Product>> GetAllProducts()
+    public async Task<ActionResult<IEnumerable<Product>>> GetAllProducts()
     {
-        return await _productService.GetAllProductsAsync();
+        try
+        {
+            var products = await _productService.GetAllProductsAsync();
+            return Ok(products); 
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, ex.Message);
+        }
     }
 
     [HttpPost]
-    public async Task CreateProduct(Product product)
+    public async Task<ActionResult> CreateProduct(Product product)
     {
-        await _productService.CreateProductAsync(product);
+        try
+        {
+            await _productService.CreateProductAsync(product);
+            return Ok();
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, ex.Message); 
+        }
     }
 
-    [HttpPatch]
-    public async Task UpdateProduct(string id, Product newProduct)
+    [HttpPatch("{id}")]
+    public async Task<ActionResult> UpdateProduct(string id, Product newProduct)
     {
-        await _productService.UpdateProductAsync(id, newProduct);
+        try
+        {
+            await _productService.UpdateProductAsync(id, newProduct);
+            return Ok(); 
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, ex.Message); 
+        }
     }
 
-    [HttpDelete]
-    public async Task RemoveProductAsync([FromBody] string id)
+    [HttpDelete("{id}")]
+    public async Task<ActionResult> RemoveProductAsync(string id)
     {
-        await _productService.RemoveProductAsync(id);
+        try
+        {
+            await _productService.RemoveProductAsync(id);
+            return Ok();
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, ex.Message); 
+        }
     }
 }

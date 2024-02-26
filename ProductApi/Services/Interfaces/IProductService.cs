@@ -13,4 +13,6 @@ public interface IProductService
     Task UpdateProductAsync(string id, Product updatedProduct);
 
     Task RemoveProductAsync(string productId);
+
+    Task<bool> isProductSKUnique(string sku);
 }

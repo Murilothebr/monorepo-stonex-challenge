@@ -8,6 +8,9 @@ using ProductApi.Repository;
 using ProductApi.Repository.Interface;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
+using FluentValidation;
+using ProductApi.Entities;
+using ProductApi.Validators;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,10 +19,9 @@ builder.Services.AddControllers();
 builder.Services.AddSwaggerGen();
 
 builder.Services.Configure<MongoDbSettings>(builder.Configuration.GetSection("ProductDatabase"));
-
 builder.Services.AddSingleton<IMongoDbSettings>(serviceProvider =>
     serviceProvider.GetRequiredService<IOptions<MongoDbSettings>>().Value);
-
+builder.Services.AddTransient<IValidator<Product>, ProductValidator>();
 builder.Services.AddScoped(typeof(IMongoRepository<>), typeof(MongoRepository<>));
 builder.Services.AddTransient<IProductService, ProductService>();
 
