@@ -38,9 +38,8 @@ public class MongoRepository<T> : IMongoRepository<T> where T : BaseEntity
     public async Task<T> GetOneAsyncBySku(string sku)
     {
         var filter = Builders<T>.Filter.Eq("Sku", sku);
-        var result = _collection.FindAsync(filter).Result.FirstOrDefault();
-  
-        return result;
+        var result =  await _collection.FindAsync(filter);
+        return result.FirstOrDefault();
     }
     
     public async Task<IEnumerable<T>> GetAllAsync()
