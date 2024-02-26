@@ -37,16 +37,16 @@
 
 #### 4. Fluent Validation
 
-- [ ] Use Fluent Validation for input validation.
-- [ ] Create validation rules for product entities.
-- [ ] Integrate validation in the services layer.
+- [x] Use Fluent Validation for input validation.
+- [x] Create validation rules for product entities.
+- [x] Integrate validation in the services layer.
 
 #### 5. Services
 
 - [x] Implement services for CRUD operations on products.
 - [x] Apply Dependency Injection for the generic repository.
-- [ ] Utilize Fluent Validation for input validation.
-- [ ] Implement MongoDB transactions in the services layer.
+- [x] Utilize Fluent Validation for input validation.
+- [x] Implement MongoDB transactions in the services layer.
 
 #### 6. Controllers
 
