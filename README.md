@@ -1,3 +1,26 @@
+# Project: Your Project Name
+
+## Description
+This is a project that uses .NET 8.0 for the backend and Next.js 14 for the frontend, both containerized, with Docker Compose for container orchestration, along with a MongoDB database.
+
+## Prerequisites
+Make sure you have Docker and Docker Compose installed on your system before proceeding with the steps below.
+
+## Automated Build Process (Windows and Ubuntu based distros)
+To automate the build process, you can use the `run-build-windows.bat` -- `run-build-ubuntu.sh` file located in the root of the repository.
+
+### Instructions:
+1. Ensure that Docker and Docker Compose are installed on your system.
+2. Double-click or run the `run-build-windows.bat` -- `run-build-ubuntu.sh` file in the root of the repository.
+3. This script will execute the necessary commands to build the Docker images for the backend and frontend components of the project.
+4. Once the build process is complete, you can proceed to run the Docker Compose command to orchestrate the containers as described in the previous sections.
+
+## Notes
+- You may need to adjust the file permissions or run it with administrative privileges if necessary.
+- If you find any issues running the bashes, you can follow the instructions in the file, its basically build both images in the root of each project, be aware of the image name, and then run docker compose with `docker-compose up -d`.
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 ## Requirements
 
 ### .NET Project Test
@@ -64,13 +87,13 @@
 
 #### 2. Pages and Routes
 
-- [ ] Create pages for listing, viewing, adding, editing, and deleting products.
+- [x] Create pages for listing, viewing, adding, editing, and deleting products.
 - [ ] Implement clean routing using Next.js.
 
 #### 3. Forms
 
-- [ ] Use react-hook-form for efficient form handling.
-- [ ] Implement form validation with zod.
+- [x] Use react-hook-form for efficient form handling.
+- [x] Implement form validation with zod.
 
 #### 4. UI Styling
 
@@ -95,7 +118,7 @@
 #### Docker Compose
 
 - [x] Create a docker-compose.yml file to orchestrate the containers for the backend, frontend, and MongoDB.
-- [ ] Include appropriate environment variables for configuration.
+- [x] Include appropriate environment variables for configuration.
 
 #### Clean Code Practices
 
@@ -107,4 +130,4 @@
 
 - [ ] Provide separate Docker Compose files for development and production.
 - [x] Include clear instructions for setting up and running the entire application in README.
-- [ ] Ensure the application is accessible through a browser after Docker Compose execution.
+- [x] Ensure the application is accessible through a browser after Docker Compose execution.

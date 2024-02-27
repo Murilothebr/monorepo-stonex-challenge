@@ -1,14 +1,16 @@
 #!/bin/bash
 
-# Build do frontend
+#  Build do frontend
 cd frontend
 docker build -t products-frontend-nextjs .
-cd -
 
-# Build do backend
-cd frontend
+cd ../
+
+#  Build do backend
+cd ProductApi/ProductApi
 docker build -t products-api .
-cd -
+
+cd ../..
 
 # Rodando o Docker Compose
 docker-compose up -d

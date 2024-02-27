@@ -1,8 +1,10 @@
 @echo off
 
 REM Build do frontend
-REM cd frontend
-REM docker build -t products-frontend-nextjs .
+cd frontend
+docker build -t products-frontend-nextjs .
+
+cd ../
 
 REM Build do backend
 cd ProductApi/ProductApi
