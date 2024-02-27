@@ -1,87 +1,84 @@
 "use client"
 
+import { zodResolver } from '@hookform/resolvers/zod';
 import { Box, Button, Group, TextInput } from "@mantine/core";
-import { useForm } from '@mantine/form';
+import { useForm } from 'react-hook-form';
 import { z } from "zod";
 import { PostCard } from '../../services/apiService';
 
 interface CardData {
-  name: string;
-  sku: string;
-  price: string;
-  stock: string;
-  description: string;
-  imageUrls: string[];
-  tags: string[];
-  sessions: string[];
-  productId: string;
-  inStock: boolean;
+ name: string;
+ sku: string;
+ price: string;
+ stock: string;
+ description: string;
+ imageUrls: string[];
+ tags: string[];
+ sessions: string[];
+ productId: string;
+ inStock: boolean;
 }
 
-const productSchema = z.
-  object({
-    Name: z.string().min(1, 'Name is required'),
-    SKU: z.string().min(5).max(20, 'SKU must be between 5 and 20 characters'),
-    Price: z.string().regex(/^\d+(\.\d{1,2})?$/).min(0, 'Price must be greater than or equal to zero'),
-    Stock: z.number().min(0, 'Stock must be a non-negative number'),
-    Description: z.string().min(1, 'Description is required'),
-    ImageUrls: z.array(z.string()).min(1, 'At least one Image URL is required'),
-    Tags: z.array(z.string()).min(1, 'At least one tag is required'),
-    Sessions: z.array(z.string()).min(1, 'At least one session is required'),
-  });
-
+const productSchema = z.object({
+  name: z.string().min(1, 'Name is required'),
+  sku: z.string().min(5).max(20, 'SKU must be between 5 and 20 characters'),
+  price: z.string().regex(/^\d+(\.\d{1,2})?$/, 'Price must be a valid number'),
+  stock: z.string().regex(/^\d+$/, 'Stock must be a valid number'),
+  description: z.string().min(1, 'Description is required'),
+  imageUrls:  z.string().min(1, 'At least one Image URL is required'),
+  tags:  z.string().min(1, 'At least one tag is required'),
+  sessions: z.string().min(1, 'At least one session is required'),
+});
 
 export default function CreateProduct() {
+ const { register, handleSubmit, formState: { errors } } = useForm({
+  resolver: zodResolver(productSchema)
+ });
 
-  const form = useForm({
-    initialValues: {
-      name: '',
-      sku: '',
-      price: "",
-      stock: "",
-      description: "",
-      imageUrls: "",
-      tags: "",
-      sessions: ""
-    },
-  });
+ const onSubmit = (data: any) => {
+  
 
-  return (
-    <Box maw={340} mx="auto">
-      <TextInput  mt={20} label="Name" placeholder="Name" {...form.getInputProps('name')} />
-      <TextInput  mt={20} label="Sku" placeholder="Sku" {...form.getInputProps('sku')} />
-      <TextInput  mt={20} type="number" label="Price" placeholder="Price" {...form.getInputProps('price')} />
-      <TextInput  mt={20} type="number" label="Stock" placeholder="Stock" {...form.getInputProps('stock')} />
-      <TextInput  mt={20} label="Description" placeholder="Description" {...form.getInputProps('description')} />
-      <TextInput  mt={20} label="ImageUrls" placeholder="ImageUrls" {...form.getInputProps('imageUrls')} />
-      <TextInput  mt={20} label="Tags" placeholder="Tags" {...form.getInputProps('tags')} />
-      <TextInput  mt={20} label="Sessions" placeholder="Sessions" {...form.getInputProps('sessions')} />
+  const convertedData: CardData = {
+    name: data.name,
+    sku: data.sku,
+    price: data.price,
+    stock: data.stock,
+    description: data.description,
+    imageUrls: data.imageUrls ? [data.imageUrls] : [],
+    tags: data.tags ? [data.tags] : [],
+    sessions: data.sessions ? [data.sessions] : [],
+    productId: "",
+    inStock: true
+  };
 
-      <Group justify="center" mt="xl">
-        <Button
-          onClick={()  =>
-           {
-            const newCardData: CardData = {
-              name: form.values.name,
-              sku: form.values.sku,
-              price: form.values.price,
-              stock: form.values.stock,
-              description: form.values.description,
-              imageUrls: [form.values.imageUrls],
-              tags: [form.values.tags],
-              sessions: [form.values.sessions],
-              productId: "",
-              inStock: true
-            };
+  console.log(data);
+  PostCard(convertedData);
+ };
 
-            console.log(newCardData)
-            PostCard(newCardData)
-           }
-          }
-        >
-          Submit Product !
-        </Button>
-      </Group>
-    </Box>
-  );
+ return (
+  
+  <Box maw={340} mx="auto">
+   <form onSubmit={handleSubmit(onSubmit)}>
+    <TextInput mt={20} label="Name" placeholder="Name" {...register('name')} />
+    {errors.name && <p style={{color: "red"}}>{errors.name.message?.toString()}</p>}
+    <TextInput mt={20} label="Sku" placeholder="Sku" {...register('sku')} />
+    {errors.sku && <p style={{color: "red"}}>{errors.sku.message?.toString()}</p>}
+    <TextInput mt={20} type="number" label="Price" placeholder="Price" {...register('price')} />
+    {errors.price && <p style={{color: "red"}}>{errors.price.message?.toString()}</p>}
+    <TextInput mt={20} type="number" label="Stock" placeholder="Stock" {...register('stock')} />
+    {errors.stock && <p style={{color: "red"}}>{errors.stock.message?.toString()}</p>}
+    <TextInput mt={20} label="Description" placeholder="Description" {...register('description')} />
+    {errors.description && <p style={{color: "red"}}>{errors.description.message?.toString()}</p>}
+    <TextInput mt={20} label="Image Url" placeholder="Image Url" {...register('imageUrls')} />
+    {errors.imageUrls && <p style={{color: "red"}}>{errors.imageUrls.message?.toString()}</p>}
+    <TextInput mt={20} label="Tags" placeholder="Tags" {...register('tags')} />
+    {errors.tags && <p style={{color: "red"}}>{errors.tags.message?.toString()}</p>}
+    <TextInput mt={20} label="Sessions" placeholder="Sessions" {...register('sessions')} />
+    {errors.sessions && <p style={{color: "red"}}>{errors.sessions.message?.toString()}</p>}
+    <Group justify="center" mt="xl">
+     <Button type="submit">Submit Product !</Button>
+    </Group>
+   </form>
+  </Box>
+ );
 }
