@@ -3,7 +3,7 @@
   display: flex;
   flex-wrap: wrap;
   padding: 30px;
-  margin-left: 200px;
+  margin-left: 225px;
 }
 
 .card {
@@ -14,7 +14,7 @@
 
 @media screen and (max-width: 767px) {
   .cardList {
-    display: flex;
+    display: flex;  
     flex-wrap: wrap;
     margin-left: 0px;
   }
@@ -24,6 +24,13 @@
     flex-basis: calc(100% - 20px);
     max-width: calc(100% - 20px); 
   }
+}
+
+.description {
+  height: 60px; /* Set a fixed height for the description container */
+  overflow: hidden; /* Hide any content that exceeds the height */
+  text-overflow: ellipsis; /* Add ellipsis (...) for text that overflows */
+  /* white-space: nowrap; /* Prevent text from wrapping */
 }
 
 .section {

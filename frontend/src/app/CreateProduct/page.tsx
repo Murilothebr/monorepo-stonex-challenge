@@ -1,10 +1,14 @@
 "use client"
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Box, Button, Group, TextInput, rem } from "@mantine/core";
+import { Box, Button, Group, TextInput, rem, Notification } from "@mantine/core";
 import { useForm } from 'react-hook-form';
 import { z } from "zod";
 import { PostCard } from '../../services/apiService';
+import { IconX, IconCheck } from '@tabler/icons-react';
+import { useEffect, useState } from 'react';
+import { redirect } from 'next/dist/server/api-utils';
+import { useRouter } from 'next/navigation';
 
 interface CardData {
   name: string;
@@ -31,9 +35,15 @@ const productSchema = z.object({
 });
 
 export default function CreateProduct() {
+  const [notification, setNotification] = useState<{
+    icon: string; message: string, color: string
+  } | null>(null);
+  const [data, setData] = useState<CardData[]>([]);
+
   const { register, handleSubmit, formState: { errors } } = useForm({
     resolver: zodResolver(productSchema)
   });
+  const { push } = useRouter();
 
   const onSubmit = (data: any) => {
     const convertedData: CardData = {
@@ -48,42 +58,54 @@ export default function CreateProduct() {
       productId: "",
       inStock: true
     };
+  
+    console.log(convertedData);
+  
+    PostCard(convertedData);
+    setNotification({ icon: 'checkIcon', message: 'Product created successfully', color: 'teal' });
 
-    console.log(data);
-
-    try {
-      PostCard(convertedData);
-      alert("sucess")
-    }
-    catch (error) {
-      alert("error")
-    }
+    setTimeout(() => {
+      push('/');
+    }, 2500);
   };
 
   return (
 
-    <Box maw={340} mx="auto">
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <TextInput mt={20} label="Name" placeholder="Name" {...register('name')} />
-        {errors.name && <p style={{ color: "red" }}>{errors.name.message?.toString()}</p>}
-        <TextInput mt={20} label="Sku" placeholder="Sku" {...register('sku')} />
-        {errors.sku && <p style={{ color: "red" }}>{errors.sku.message?.toString()}</p>}
-        <TextInput mt={20} type="number" label="Price" placeholder="Price" {...register('price')} />
-        {errors.price && <p style={{ color: "red" }}>{errors.price.message?.toString()}</p>}
-        <TextInput mt={20} type="number" label="Stock" placeholder="Stock" {...register('stock')} />
-        {errors.stock && <p style={{ color: "red" }}>{errors.stock.message?.toString()}</p>}
-        <TextInput mt={20} label="Description" placeholder="Description" {...register('description')} />
-        {errors.description && <p style={{ color: "red" }}>{errors.description.message?.toString()}</p>}
-        <TextInput mt={20} label="Image Url" placeholder="Image Url" {...register('imageUrls')} />
-        {errors.imageUrls && <p style={{ color: "red" }}>{errors.imageUrls.message?.toString()}</p>}
-        <TextInput mt={20} label="Tags" placeholder="Tags" {...register('tags')} />
-        {errors.tags && <p style={{ color: "red" }}>{errors.tags.message?.toString()}</p>}
-        <TextInput mt={20} label="Sessions" placeholder="Sessions" {...register('sessions')} />
-        {errors.sessions && <p style={{ color: "red" }}>{errors.sessions.message?.toString()}</p>}
-        <Group justify="center" mt="xl">
-          <Button type="submit">Submit Product !</Button>
-        </Group>
-      </form>
-    </Box>
+    <>
+      {<Box maw={340} mx="auto">
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <TextInput mt={20} label="Name" placeholder="Name" {...register('name')} />
+          {errors.name && <p style={{ color: "red" }}>{errors.name.message?.toString()}</p>}
+          <TextInput mt={20} label="Sku" placeholder="Sku" {...register('sku')} />
+          {errors.sku && <p style={{ color: "red" }}>{errors.sku.message?.toString()}</p>}
+          <TextInput mt={20} type="number" label="Price" placeholder="Price" {...register('price')} />
+          {errors.price && <p style={{ color: "red" }}>{errors.price.message?.toString()}</p>}
+          <TextInput mt={20} type="number" label="Stock" placeholder="Stock" {...register('stock')} />
+          {errors.stock && <p style={{ color: "red" }}>{errors.stock.message?.toString()}</p>}
+          <TextInput mt={20} label="Description" placeholder="Description" {...register('description')} />
+          {errors.description && <p style={{ color: "red" }}>{errors.description.message?.toString()}</p>}
+          <TextInput mt={20} label="Image Url" placeholder="Image Url" {...register('imageUrls')} />
+          {errors.imageUrls && <p style={{ color: "red" }}>{errors.imageUrls.message?.toString()}</p>}
+          <TextInput mt={20} label="Tags" placeholder="Tags" {...register('tags')} />
+          {errors.tags && <p style={{ color: "red" }}>{errors.tags.message?.toString()}</p>}
+          <TextInput mt={20} label="Sessions" placeholder="Sessions" {...register('sessions')} />
+          {errors.sessions && <p style={{ color: "red" }}>{errors.sessions.message?.toString()}</p>}
+          <Group justify="center" mt="xl">
+            <Button type="submit">Submit Product !</Button>
+          </Group>
+        </form>
+      </Box>}
+
+      {notification && (
+          <Notification
+            title={notification.color === 'red' ? 'Error!' : 'Success!'}
+            color={notification.color}
+            onClose={() => setNotification(null)}
+            style={{ width: '300px', height: '150px', padding: '20px', fontSize: '1.2rem', position: 'fixed', bottom: '20px', zIndex: '9999'}}
+          >
+            {notification.message}  
+          </Notification>
+        )}
+    </>
   );
 }
