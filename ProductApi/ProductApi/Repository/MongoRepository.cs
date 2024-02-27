@@ -37,7 +37,7 @@ public class MongoRepository<T> : IMongoRepository<T> where T : BaseEntity
 
     public async Task<T> GetOneAsyncBySku(string sku)
     {
-        var filter = Builders<T>.Filter.Eq("Sku", sku);
+        var filter = Builders<T>.Filter.Eq("SKU", sku);
         var result =  await _collection.FindAsync(filter);
         return result.FirstOrDefault();
     }
