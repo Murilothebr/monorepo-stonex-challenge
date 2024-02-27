@@ -61,12 +61,29 @@ export default function CreateProduct() {
   
     console.log(convertedData);
   
-    PostCard(convertedData);
-    setNotification({ icon: 'checkIcon', message: 'Product created successfully', color: 'teal' });
+    try {
+      const error = PostCard(convertedData); // Await PostCard
+  
+      if (error instanceof Error) {
+        if (error.message && error.message.includes('Conflict Error: Sku must be unique')) {
+          setNotification({ icon: 'xIcon', message: 'The resource already exists', color: 'red' });
+          console.error('Unhandled error:', error);
+          
+        } else {
+          setNotification({ icon: 'xIcon', message: 'An error occurred', color: 'red' });
+          console.error('Unhandled error:', error);
+        }
+      } else {
 
-    setTimeout(() => {
-      push('/');
-    }, 2500);
+        setNotification({ icon: 'checkIcon', message: 'Product created successfully', color: 'teal' });
+        setTimeout(() => {
+          push('/');
+        }, 2500);
+      }
+    } catch (error) {
+      setNotification({ icon: 'xIcon', message: 'An error occurred', color: 'red' });
+      console.error('Unhandled error:', error);
+    }
   };
 
   return (

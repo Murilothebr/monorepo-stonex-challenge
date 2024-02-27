@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using FluentValidation;
+using Microsoft.AspNetCore.Mvc;
 using ProductApi.Entities;
 using ProductApi.Services.Interfaces;
 
@@ -53,6 +54,10 @@ public class ProductController : ControllerBase
         {
             await _productService.CreateProductAsync(product);
             return Ok();
+        }
+        catch (ValidationException ex)
+        {
+            return StatusCode(409, ex.Message);
         }
         catch (Exception ex)
         {
