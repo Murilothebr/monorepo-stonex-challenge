@@ -62,8 +62,11 @@ jobs:
       run: |
         ssh-keyscan -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
 
+    - name: Run ls
+      run: ls
+
     - name: Copy docker-compose.yaml to server
-      run: scp docker-compose.yaml ubuntu@${{ secrets.SSH_HOST }}:~/docker-compose.yaml
+      run: scp ./docker-compose.yaml ubuntu@${{ secrets.SSH_HOST }}:~/docker-compose.yaml
 
     - name: SSH and run docker-compose up
       run: ssh ubuntu@${{ secrets.SSH_HOST }} 'cd ~/ && docker-compose up -d'
