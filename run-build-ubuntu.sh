@@ -15,5 +15,3 @@ cd ../..
 # Rodando o Docker Compose
 docker-compose up -d
 
-# Aguardando a tecla Enter para fechar o bash
-read -p "Pressione Enter para fechar o bash"

@@ -14,6 +14,3 @@ cd ../..
 
 REM Rodando o Docker Compose
 docker-compose up -d
-
-REM Aguardando a tecla Enter para fechar o terminal
-pause

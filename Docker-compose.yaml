@@ -3,7 +3,7 @@ version: '3.8'
 services:
   productsapi:
     image: products-api
-    container_name: products-api
+    container_name: murilothebr/products-api
     ports:
       - "44335:8080"
     restart: always 
@@ -15,18 +15,15 @@ services:
     container_name: mongodb
     ports:
       - "27017:27017"
-    environment:
-      - MONGO_INITDB_ROOT_USERNAME=root
-      - MONGO_INITDB_ROOT_PASSWORD=40c79244-e384-40e5-a317-19742c22b332
     volumes:
       - mongodb_data:/data/db
     restart: always
     networks:
       - products-network
-
+  
   products-next:
     image: products-frontend-nextjs
-    container_name: products-frontend
+    container_name: murilothebr/products-frontend
     ports:
       - "5173:3000"
     restart: always
