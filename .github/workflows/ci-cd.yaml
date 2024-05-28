@@ -58,6 +58,10 @@ jobs:
       with:
         ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
+    - name: Add SSH known hosts
+      run: |
+        ssh-keyscan -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
+
     - name: Copy docker-compose.yml to server
       run: scp docker-compose.yml ubuntu@${{ secrets.SSH_HOST }}:~/docker-compose.yml
 
