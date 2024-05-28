@@ -35,7 +35,7 @@ jobs:
         context: .
         file: ./ProductApi/ProductApi/Dockerfile
         push: true
-        tags: ${{ env.DOCKER_HUB_USERNAME }}/products-api/:latest
+        tags: ${{ env.DOCKER_HUB_USERNAME }}/products-api:latest
 
     - name: Build and push container 2
       uses: docker/build-push-action@v5
