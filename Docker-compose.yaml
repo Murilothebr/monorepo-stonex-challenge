@@ -2,8 +2,8 @@ version: '3.8'
 
 services:
   productsapi:
-    image: products-api
-    container_name: murilothebr/products-api
+    image: murilothebr/products-api
+    container_name: products-api
     ports:
       - "44335:8080"
     restart: always 
@@ -22,8 +22,8 @@ services:
       - products-network
   
   products-next:
-    image: products-frontend-nextjs
-    container_name: murilothebr/products-frontend
+    image: murilothebr/products-frontend
+    container_name: products-frontend
     ports:
       - "5173:3000"
     restart: always
