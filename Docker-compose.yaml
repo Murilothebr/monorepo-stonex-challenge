@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   productsapi:
-    image: murilothebr/products-api
+    image: murilothebr/products-api:latest
     container_name: products-api
     ports:
       - "44335:8080"
@@ -22,7 +22,7 @@ services:
       - products-network
   
   products-next:
-    image: murilothebr/products-frontend
+    image: murilothebr/products-frontend:latest
     container_name: products-frontend
     ports:
       - "5173:3000"
