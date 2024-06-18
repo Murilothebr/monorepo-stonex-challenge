@@ -10,8 +10,7 @@ project:
 
 # Build settings
 build:
-  image: latest
-  os: anything-that-runs-docker
+  os: ubuntu-22.04
 
 # Build requirements
 requirements:
