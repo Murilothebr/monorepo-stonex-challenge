@@ -11,16 +11,13 @@ project:
 # Build settings
 build:
   image: latest
+  os: anything-that-runs-docker
 
 # Build requirements
 requirements:
-  python:
+  docker:
     - docker
     - docker-compose
-
-# Sphinx configuration
-sphinx:
-  configuration: docs/conf.py
 
 # Automated Build Process (Windows and Ubuntu based distros)
 build:
