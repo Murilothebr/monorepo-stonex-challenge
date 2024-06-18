@@ -1,102 +1,92 @@
+# .readthedocs.yaml
+
 version: 2
 
+# Project details
 project:
-  name: "Your Project Name"
-  description: >
+  name: Your Project Name
+  description: |
     This is a project that uses .NET 8.0 for the backend and Next.js 14 for the frontend, both containerized, with Docker Compose for container orchestration, along with a MongoDB database.
 
-requirements:
-  - docker
-  - docker-compose
-
+# Build settings
 build:
   image: latest
-  jobs:
-    - build-backend:
-        script:
-          - ./run-build-windows.bat
-          - ./run-build-ubuntu.sh
-        when: on_push
 
-steps:
-  - name: Build Backend and Frontend
-    script:
-      - Ensure that Docker and Docker Compose are installed on your system.
-      - Double-click or run the run-build-windows.bat -- run-build-ubuntu.sh file in the root of the repository.
-      - This script will execute the necessary commands to build the Docker images for the backend and frontend components of the project.
-      - Once the build process is complete, you can proceed to run the Docker Compose command to orchestrate the containers as described in the previous sections.
+# Build requirements
+requirements:
+  python:
+    - docker
+    - docker-compose
 
+# Sphinx configuration
+sphinx:
+  configuration: docs/conf.py
+
+# Automated Build Process (Windows and Ubuntu based distros)
+build:
+  commands:
+    - name: Automated Build Process
+      description: |
+        To automate the build process, you can use the run-build-windows.bat or run-build-ubuntu.sh file located in the root of the repository.
+      steps:
+        - Ensure that Docker and Docker Compose are installed on your system.
+        - Double-click or run the run-build-windows.bat or run-build-ubuntu.sh file in the root of the repository.
+        - This script will execute the necessary commands to build the Docker images for the backend and frontend components of the project.
+        - Once the build process is complete, you can proceed to run the Docker Compose command to orchestrate the containers as described in the previous sections.
+
+# Notes
 notes:
   - You may need to adjust the file permissions or run it with administrative privileges if necessary.
-  - If you find any issues running the bashes, you can follow the instructions in the file, its basically build both images in the root of each project, be aware of the image name, and then run docker compose with docker-compose up -d.
+  - If you find any issues running the bashes, you can follow the instructions in the file, which basically build both images in the root of each project. Be aware of the image name, and then run docker-compose with docker-compose up -d.
 
+# Requirements
 requirements:
-  backend:
+  - .NET Project Test
+
+# Backend (.NET Core)
+backend:
+  setup:
     - Create a new .NET Core project.
     - Configure MongoDB as the database.
     - Implement Clean Architecture principles (Separation of Concerns, Dependency Inversion, etc.).
-  frontend:
+  steps:
+    - Project Setup and Configuration
+      - Set up a clean .NET Core project structure.
+      - Use Dockerfile for containerization.
+    - Model
+      - Create a product model with necessary fields (SKU, price, stock, etc.).
+      - Implement data annotations for validation.
+    - Generic MongoDB Repository
+      - Implement a generic MongoDB repository that accepts entities as '< T >'.
+      - Include methods like Find, FindById, FindWhere, etc.
+      - Utilize official MongoDB driver for .NET.
+      - Implement MongoDB transactions.
+    - Fluent Validation
+      - Use Fluent Validation for input validation.
+      - Create validation rules for product entities.
+      - Integrate validation in the services layer.
+    - Services
+      - Implement services for CRUD operations on products.
+      - Apply Dependency Injection for the generic repository.
+      - Utilize Fluent Validation for input validation.
+      - Implement MongoDB transactions in the services layer.
+    - Controllers
+      - Create RESTful controllers for product CRUD operations.
+      - Follow Clean Code principles in controller methods.
+
+# Frontend (ReactJS with Next.js)
+frontend:
+  setup:
     - Initialize a new Next.js project with React.
     - Use a modular component structure for better organization.
     - Implement Clean Code principles in the frontend codebase.
-
-backend:
-  project_setup_and_configuration:
-    - Set up a clean .NET Core project structure.
-    - Use Dockerfile for containerization.
-  model:
-    - Create a product model with necessary fields (SKU, price, stock, etc.).
-    - Implement data annotations for validation.
-  generic_mongodb_repository:
-    - Implement a generic MongoDB repository that accepts entities as '< T >'.
-    - Include methods like Find, FindById, FindWhere, etc.
-    - Utilize official MongoDB driver for .NET.
-    - Implement MongoDB transactions.
-  fluent_validation:
-    - Use Fluent Validation for input validation.
-    - Create validation rules for product entities.
-    - Integrate validation in the services layer.
-  services:
-    - Implement services for CRUD operations on products.
-    - Apply Dependency Injection for the generic repository.
-    - Utilize Fluent Validation for input validation.
-    - Implement MongoDB transactions in the services layer.
-  controllers:
-    - Create RESTful controllers for product CRUD operations.
-    - Follow Clean Code principles in controller methods.
-
-frontend:
-  project_setup_and_configuration:
-    - Set up a clean Next.js project structure.
-    - Utilize Dockerfile for frontend containerization.
-  pages_and_routes:
-    - Create pages for listing, viewing, adding, editing, and deleting products.
-    - Implement clean routing using Next.js.
-  forms:
-    - Use react-hook-form for efficient form handling.
-    - Implement form validation with zod.
-  ui_styling:
-    - Apply mantine for UI component styling.
-    - Follow clean code practices in styling components.
-
-integration_between_frontend_and_backend:
-  api_consumption:
-    - Configure the frontend to consume backend API endpoints.
-    - Utilize a clean approach for handling API calls.
-  dependency_injection:
-    - Consider using Dependency Injection on the frontend for managing API calls.
-
-integration:
-  docker_compose:
-    - Create a docker-compose.yml file to orchestrate the containers for the backend, frontend, and MongoDB.
-    - Include appropriate environment variables for configuration.
-
-clean_code_practices:
-  - Enforce SOLID principles in both backend and frontend code.
-  - Ensure meaningful variable/method names and code readability.
-  - Implement unit tests for critical functionalities.
-
-delivery:
-  - Provide separate Docker Compose files for development and production.
-  - Include clear instructions for setting up and running the entire application in README.
-  - Ensure the application is accessible through a browser after Docker Compose execution.
+  steps:
+    - Project Setup and Configuration
+      - Set up a clean Next.js project structure.
+      - Utilize Dockerfile for frontend containerization.
+    - Pages and Routes
+      - Create pages for listing, viewing, adding, editing, and deleting products.
+      - Implement clean routing using Next.js.
+    - Forms
+      - Use react-hook-form for efficient form handling.
+      - Implement fo
