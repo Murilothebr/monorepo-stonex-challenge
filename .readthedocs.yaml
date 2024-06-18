@@ -1,90 +1,20 @@
 # .readthedocs.yaml
+# Read the Docs configuration file
+# See https://docs.readthedocs.io/en/stable/config-file/v2.html for details
 
+# Required
 version: 2
 
-# Build settings
+# Set the OS, Python version and other tools you might need
 build:
   os: ubuntu-22.04
   tools:
-    dotnet: "8"
+    python: "3.12"
+    # You can also specify other tool versions:
+    # nodejs: "19"
+    # rust: "1.64"
+    # golang: "1.19"
 
-# Project details
-project:
-  name: Your Project Name
-  description: |
-    This is a project that uses .NET 8.0 for the backend and Next.js 14 for the frontend, both containerized, with Docker Compose for container orchestration, along with a MongoDB database.
-
-# Build requirements
-requirements:
-  docker:
-    - docker
-    - docker-compose
-
-# Automated Build Process (Windows and Ubuntu based distros)
-build:
-  commands:
-    - name: Automated Build Process
-      description: |
-        To automate the build process, you can use the run-build-windows.bat or run-build-ubuntu.sh file located in the root of the repository.
-      steps:
-        - Ensure that Docker and Docker Compose are installed on your system.
-        - Double-click or run the run-build-windows.bat or run-build-ubuntu.sh file in the root of the repository.
-        - This script will execute the necessary commands to build the Docker images for the backend and frontend components of the project.
-        - Once the build process is complete, you can proceed to run the Docker Compose command to orchestrate the containers as described in the previous sections.
-
-# Notes
-notes:
-  - You may need to adjust the file permissions or run it with administrative privileges if necessary.
-  - If you find any issues running the bashes, you can follow the instructions in the file, which basically build both images in the root of each project. Be aware of the image name, and then run docker-compose with docker-compose up -d.
-
-# Requirements
-requirements:
-  - .NET Project Test
-
-# Backend (.NET Core)
-backend:
-  setup:
-    - Create a new .NET Core project.
-    - Configure MongoDB as the database.
-    - Implement Clean Architecture principles (Separation of Concerns, Dependency Inversion, etc.).
-  steps:
-    - Project Setup and Configuration
-      - Set up a clean .NET Core project structure.
-      - Use Dockerfile for containerization.
-    - Model
-      - Create a product model with necessary fields (SKU, price, stock, etc.).
-      - Implement data annotations for validation.
-    - Generic MongoDB Repository
-      - Implement a generic MongoDB repository that accepts entities as '< T >'.
-      - Include methods like Find, FindById, FindWhere, etc.
-      - Utilize official MongoDB driver for .NET.
-      - Implement MongoDB transactions.
-    - Fluent Validation
-      - Use Fluent Validation for input validation.
-      - Create validation rules for product entities.
-      - Integrate validation in the services layer.
-    - Services
-      - Implement services for CRUD operations on products.
-      - Apply Dependency Injection for the generic repository.
-      - Utilize Fluent Validation for input validation.
-      - Implement MongoDB transactions in the services layer.
-    - Controllers
-      - Create RESTful controllers for product CRUD operations.
-      - Follow Clean Code principles in controller methods.
-
-# Frontend (ReactJS with Next.js)
-frontend:
-  setup:
-    - Initialize a new Next.js project with React.
-    - Use a modular component structure for better organization.
-    - Implement Clean Code principles in the frontend codebase.
-  steps:
-    - Project Setup and Configuration
-      - Set up a clean Next.js project structure.
-      - Utilize Dockerfile for frontend containerization.
-    - Pages and Routes
-      - Create pages for listing, viewing, adding, editing, and deleting products.
-      - Implement clean routing using Next.js.
-    - Forms
-      - Use react-hook-form for efficient form handling.
-      - Implement fo
+# Build documentation in the "docs/" directory with Sphinx
+sphinx:
+  configuration: docs/conf.py
