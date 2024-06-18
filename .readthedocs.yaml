@@ -2,15 +2,17 @@
 
 version: 2
 
+# Build settings
+build:
+  os: ubuntu-22.04
+  tools:
+    dotnet: "8"
+
 # Project details
 project:
   name: Your Project Name
   description: |
     This is a project that uses .NET 8.0 for the backend and Next.js 14 for the frontend, both containerized, with Docker Compose for container orchestration, along with a MongoDB database.
-
-# Build settings
-build:
-  os: ubuntu-22.04
 
 # Build requirements
 requirements:
