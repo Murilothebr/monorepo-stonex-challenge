@@ -34,6 +34,7 @@ Instructions:
 Notes
 - You may need to adjust the file permissions or run it with administrative privileges if necessary.
 - If you find any issues running the bashes, you can follow the instructions in the file, its basically build both images in the root of each project, be aware of the image name, and then run docker compose with `docker-compose up -d`.
+
 ===============================================
 
 
