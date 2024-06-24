@@ -1,6 +1,7 @@
 .. include:: ../README.rst
 
-Welcome to my project's documentation!
+Project Checklist
+
 ===================================
 
 Backend (.NET Core)

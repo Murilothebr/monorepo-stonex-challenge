@@ -26,10 +26,10 @@ Automated Build Process (Windows and Ubuntu based distros)
 To automate the build process, you can use the `run-build-windows.bat` -- `run-build-ubuntu.sh` file located in the root of the repository.
 
 Instructions:
-# Ensure that Docker and Docker Compose are installed on your system.
-# Double-click or run the `run-build-windows.bat` -- `run-build-ubuntu.sh` file in the root of the repository.
-# This script will execute the necessary commands to build the Docker images for the backend and frontend components of the project.
-# Once the build process is complete, you can proceed to run the Docker Compose command to orchestrate the containers as described in the previous sections.
+#. Ensure that Docker and Docker Compose are installed on your system.
+#. Double-click or run the `run-build-windows.bat` -- `run-build-ubuntu.sh` file in the root of the repository.
+#. This script will execute the necessary commands to build the Docker images for the backend and frontend components of the project.
+#. Once the build process is complete, you can proceed to run the Docker Compose command to orchestrate the containers as described in the previous sections.
 
 Notes
 - You may need to adjust the file permissions or run it with administrative privileges if necessary.
